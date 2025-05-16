@@ -10,7 +10,13 @@ const pdfParse = require("pdf-parse");
 const XLSX = require("xlsx"); // Thêm dòng này
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.ORIGIN_URL,
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 const upload = multer({ dest: "uploads/" });
