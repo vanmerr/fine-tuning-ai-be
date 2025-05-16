@@ -12,8 +12,9 @@ const XLSX = require("xlsx"); // Thêm dòng này
 const app = express();
 app.use(
   cors({
-    origin: process.env.ORIGIN_URL,
+    origin: process.env.ORIGIN_URL || "https://fine-tuning-ai-fe.onrender.com",
     methods: ["GET", "POST"],
+
     credentials: true,
   })
 );
