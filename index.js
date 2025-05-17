@@ -12,9 +12,11 @@ const XLSX = require("xlsx"); // Thêm dòng này
 const app = express();
 app.use(
   cors({
-    origin: process.env.ORIGIN_URL || "https://fine-tuning-ai-fe.onrender.com",
+    origin: [
+      "https://fine-tuning-ai-fe.onrender.com",
+      "http://localhost:5173"
+    ],
     methods: ["GET", "POST"],
-
     credentials: true,
   })
 );
@@ -139,6 +141,11 @@ Question: ${question}
 
     res.status(500).json({ error: err.message });
   }
+});
+
+// API health check
+app.get("/api/ping", (req, res) => {
+  res.json({ status: "ok" });
 });
 
 app.listen(5000, () => console.log("Backend running on http://localhost:5000"));
